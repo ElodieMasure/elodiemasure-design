@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title data-fr="Elodie Masure — Design d'intérieur & Photographie immobilière" data-en="Elodie Masure — Interior Design & Real Estate Photography" data-es="Elodie Masure — Diseño de interiores y Fotografía inmobiliaria">Elodie Masure — Design d'intérieur & Photographie immobilière</title>
+<meta name="description" data-fr="Studio indépendant. Direction artistique d'intérieurs et prises de vue immobilières de prestige sur la Côte d'Azur, Paris et Marrakech." data-en="Independent studio. Interior art direction and fine real estate photography across the French Riviera, Paris and Marrakech." data-es="Estudio independiente. Dirección artística de interiores y fotografía inmobiliaria de lujo en la Costa Azul, París y Marrakech." content="Studio indépendant. Direction artistique d'intérieurs et prises de vue immobilières de prestige sur la Côte d'Azur, Paris et Marrakech.">
+
+<link rel="alternate" hreflang="fr" href="/?lang=fr">
+<link rel="alternate" hreflang="en" href="/?lang=en">
+<link rel="alternate" hreflang="es" href="/?lang=es">
+<link rel="alternate" hreflang="x-default" href="/">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images.unsplash.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --ink:#0e0d0b;
+  --ink-2:#15140f;
+  --bone:#ece6dc;
+  --bone-2:#ddd4c5;
+  --smoke:#3a3632;
+  --ash:#8a8378;
+  --brass:#b08a50;
+  --line:rgba(236,230,220,.14);
+  --fs-serif:'Fraunces',ui-serif,Georgia,serif;
+  --fs-sans:'Jost','Helvetica Neue',sans-serif;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{
+  margin:0;
+  font-family:var(--fs-sans);
+  font-weight:300;
+  font-size:15px;
+  letter-spacing:.02em;
+  line-height:1.7;
+  background:var(--ink);
+  color:var(--bone);
+  overflow-x:hidden;
+}
+body.menu-open{overflow:hidden}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;letter-spacing:inherit}
+
+/* GRAIN OVERLAY */
+body::before{
+  content:"";
+  position:fixed;inset:0;
+  pointer-events:none;
+  z-index:50;
+  opacity:.06;
+  mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.55 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+
+/* CURSOR */
+.cursor,.cursor-dot{
+  position:fixed;top:0;left:0;z-index:200;
+  pointer-events:none;
+  transform:translate3d(-50%,-50%,0);
+  mix-blend-mode:difference;
+  transition:width .35s cubic-bezier(.2,.8,.2,1),height .35s cubic-bezier(.2,.8,.2,1),border-color .35s;
+}
+.cursor{width:34px;height:34px;border:1px solid var(--bone);border-radius:50%}
+.cursor-dot{width:5px;height:5px;background:var(--bone);border-radius:50%;transition:transform .1s linear}
+.cursor.hover{width:64px;height:64px;border-color:var(--brass)}
+@media (hover:none),(pointer:coarse){.cursor,.cursor-dot{display:none}}
+
+/* LOADER */
+#loader{
+  position:fixed;inset:0;z-index:300;
+  background:var(--ink);
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:24px;
+  transition:opacity .8s ease, visibility 0s .8s;
+}
+#loader.done{opacity:0;visibility:hidden}
+.loader-mark{
+  font-family:var(--fs-serif);
+  font-weight:300;font-style:italic;
+  font-size:clamp(28px,4vw,44px);
+  letter-spacing:.02em;
+  color:var(--bone);
+  opacity:.9;
+}
+.loader-bar{width:180px;height:1px;background:rgba(236,230,220,.15);position:relative;overflow:hidden}
+.loader-bar::after{content:"";position:absolute;inset:0;background:var(--brass);transform-origin:left;animation:load 1.6s cubic-bezier(.8,0,.2,1) forwards}
+@keyframes load{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+/* TOP BAR */
+.topbar{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+  padding:24px clamp(24px,4vw,56px);
+  mix-blend-mode:difference;
+  color:var(--bone);
+}
+.mark{
+  font-family:var(--fs-serif);
+  font-weight:400;font-style:italic;
+  font-size:18px;letter-spacing:.01em;
+}
+.mark b{font-style:normal;font-weight:400}
+.lang{
+  display:flex;gap:2px;justify-self:center;
+  font-size:11px;letter-spacing:.24em;text-transform:uppercase;
+}
+.lang button{
+  padding:6px 10px;opacity:.45;transition:opacity .3s,color .3s;
+  position:relative;
+}
+.lang button.active{opacity:1;color:var(--brass)}
+.lang button:hover{opacity:1}
+.lang .divider{opacity:.3;padding:6px 2px}
+.menu-trigger{
+  justify-self:end;
+  display:inline-flex;align-items:center;gap:12px;
+  font-size:11px;letter-spacing:.28em;text-transform:uppercase;
+}
+.menu-trigger .bars{display:inline-block;width:28px;height:10px;position:relative}
+.menu-trigger .bars::before,.menu-trigger .bars::after{
+  content:"";position:absolute;left:0;right:0;height:1px;background:currentColor;
+  transition:transform .5s cubic-bezier(.7,0,.2,1), top .3s;
+}
+.menu-trigger .bars::before{top:2px}
+.menu-trigger .bars::after{top:7px}
+body.menu-open .menu-trigger .bars::before{top:4.5px;transform:rotate(45deg)}
+body.menu-open .menu-trigger .bars::after{top:4.5px;transform:rotate(-45deg)}
+
+/* FULLSCREEN MENU */
+.overlay{
+  position:fixed;inset:0;z-index:90;
+  background:var(--ink-2);
+  display:flex;
+  clip-path:inset(0 0 100% 0);
+  transition:clip-path .9s cubic-bezier(.7,0,.2,1);
+}
+body.menu-open .overlay{clip-path:inset(0 0 0% 0)}
+.overlay-image{
+  position:relative;flex:1;
+  background:url("https://images.unsplash.com/photo-1600210491892-03d54c0aaf87?w=1400&q=80") center/cover no-repeat;
+  filter:grayscale(.2) contrast(1.02);
+}
+.overlay-image::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(14,13,11,.75))}
+.overlay-nav{
+  flex:1.15;
+  display:flex;flex-direction:column;justify-content:space-between;
+  padding:120px clamp(40px,6vw,96px) 48px;
+}
+.overlay-nav ol{
+  list-style:none;margin:0;padding:0;
+  counter-reset:nav;
+}
+.overlay-nav li{
+  counter-increment:nav;
+  border-top:1px solid var(--line);
+  padding:14px 0;
+  opacity:0;transform:translateY(24px);
+  transition:opacity .6s ease, transform .6s ease;
+}
+.overlay-nav li:last-child{border-bottom:1px solid var(--line)}
+body.menu-open .overlay-nav li{opacity:1;transform:translateY(0)}
+body.menu-open .overlay-nav li:nth-child(1){transition-delay:.35s}
+body.menu-open .overlay-nav li:nth-child(2){transition-delay:.45s}
+body.menu-open .overlay-nav li:nth-child(3){transition-delay:.55s}
+body.menu-open .overlay-nav li:nth-child(4){transition-delay:.65s}
+.overlay-nav a{
+  display:flex;align-items:baseline;gap:24px;
+  font-family:var(--fs-serif);font-weight:300;font-style:italic;
+  font-size:clamp(42px,7vw,92px);line-height:1;
+  letter-spacing:-.01em;
+  transition:color .3s, letter-spacing .5s cubic-bezier(.2,.8,.2,1);
+}
+.overlay-nav a::before{
+  content:counter(nav,decimal-leading-zero);
+  font-style:normal;font-family:var(--fs-sans);font-size:12px;
+  letter-spacing:.28em;color:var(--ash);
+  transform:translateY(-.8em);
+}
+.overlay-nav a:hover{color:var(--brass);letter-spacing:.01em}
+.overlay-foot{
+  display:flex;justify-content:space-between;gap:24px;
+  font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--ash);
+}
+.overlay-foot a:hover{color:var(--bone)}
+@media (max-width:900px){
+  .overlay-image{display:none}
+  .overlay-nav{padding:140px 28px 40px}
+}
+
+/* HERO */
+.hero{
+  position:relative;height:100vh;min-height:680px;
+  overflow:hidden;
+  display:flex;align-items:flex-end;
+  padding:0 clamp(24px,4vw,56px) clamp(48px,6vh,96px);
+}
+.hero-bg{position:absolute;inset:-6% -6% -10%;will-change:transform}
+.hero-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(.78) contrast(1.05) saturate(.9)}
+.hero::before{
+  content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(120% 70% at 50% 0%,transparent 40%,rgba(14,13,11,.55) 100%),
+    linear-gradient(180deg,rgba(14,13,11,.25) 0%,rgba(14,13,11,.15) 40%,rgba(14,13,11,.9) 100%);
+  z-index:1;
+}
+.hero-inner{position:relative;z-index:2;width:100%;display:grid;grid-template-columns:1fr auto;align-items:end;gap:40px}
+.hero-meta{
+  font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--bone-2);
+  display:flex;flex-direction:column;gap:14px;
+  max-width:340px;
+}
+.hero-meta .rule{width:56px;height:1px;background:var(--brass)}
+.hero h1{
+  margin:0 0 .2em;
+  font-family:var(--fs-serif);
+  font-weight:300;
+  font-size:clamp(56px,11vw,180px);
+  line-height:.94;letter-spacing:-.02em;
+  font-variation-settings:"opsz" 144;
+}
+.hero h1 .amp{font-style:italic;color:var(--brass);font-weight:400;padding:0 .04em}
+.hero-sub{
+  display:flex;align-items:center;gap:18px;
+  font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--bone-2);
+}
+.hero-cta{
+  justify-self:end;align-self:end;
+  display:inline-flex;flex-direction:column;align-items:flex-end;gap:14px;
+}
+.hero-cta .note{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--ash);max-width:180px;text-align:right}
+.btn{
+  position:relative;display:inline-flex;align-items:center;gap:14px;
+  padding:18px 28px;
+  border:1px solid rgba(236,230,220,.35);
+  font-size:11px;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--bone);
+  overflow:hidden;isolation:isolate;
+  transition:color .4s, border-color .4s;
+}
+.btn::before{
+  content:"";position:absolute;inset:0;background:var(--bone);
+  transform:translateY(101%);transition:transform .6s cubic-bezier(.7,0,.2,1);
+  z-index:-1;
+}
+.btn:hover{color:var(--ink);border-color:var(--bone)}
+.btn:hover::before{transform:translateY(0)}
+.btn .arrow{width:22px;height:1px;background:currentColor;position:relative}
+.btn .arrow::after{content:"";position:absolute;right:0;top:-3px;width:8px;height:8px;border-right:1px solid currentColor;border-top:1px solid currentColor;transform:rotate(45deg)}
+
+.hero-scroll{
+  position:absolute;bottom:20px;left:50%;transform:translateX(-50%);z-index:2;
+  font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--ash);
+  display:flex;flex-direction:column;align-items:center;gap:14px;
+}
+.hero-scroll .line{width:1px;height:52px;background:linear-gradient(var(--brass),transparent);animation:drip 2.4s ease-in-out infinite}
+@keyframes drip{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+@media (max-width:760px){
+  .hero-inner{grid-template-columns:1fr}
+  .hero-cta{justify-self:start;align-items:flex-start}
+  .hero-cta .note{text-align:left}
+}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(48px);transition:opacity 1.2s cubic-bezier(.2,.8,.2,1),transform 1.2s cubic-bezier(.2,.8,.2,1)}
+.reveal.in{opacity:1;transform:none}
+.reveal.d1{transition-delay:.12s}
+.reveal.d2{transition-delay:.22s}
+.reveal.d3{transition-delay:.34s}
+
+/* SECTION BASE */
+.section{padding:clamp(96px,14vh,180px) clamp(24px,5vw,80px);position:relative}
+.section-label{
+  font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:var(--ash);
+  display:flex;align-items:center;gap:14px;margin-bottom:28px;
+}
+.section-label::before{content:"";display:inline-block;width:36px;height:1px;background:var(--brass)}
+.section-title{
+  font-family:var(--fs-serif);
+  font-weight:300;font-size:clamp(40px,6vw,88px);line-height:1.02;letter-spacing:-.015em;
+  margin:0 0 .3em;max-width:16ch;
+}
+.section-title em{font-weight:300;color:var(--brass)}
+.section-lede{
+  max-width:52ch;color:var(--bone-2);font-size:16px;line-height:1.75;font-weight:300;
+}
+
+/* INTRO */
+.intro{
+  display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,96px);
+  align-items:center;
+}
+.intro-text p{margin:0 0 1.2em}
+.intro-numbers{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:48px;border-top:1px solid var(--line);padding-top:36px}
+.intro-numbers .num{font-family:var(--fs-serif);font-weight:300;font-size:44px;line-height:1;letter-spacing:-.01em;color:var(--bone)}
+.intro-numbers .num em{font-style:italic;color:var(--brass);font-size:.6em;vertical-align:top}
+.intro-numbers .lbl{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--ash);margin-top:10px;display:block}
+.intro-frame{position:relative;aspect-ratio:4/5;overflow:hidden;background:var(--smoke)}
+.intro-frame img{width:100%;height:100%;object-fit:cover;transition:transform 1.6s cubic-bezier(.2,.8,.2,1)}
+.intro-frame:hover img{transform:scale(1.04)}
+.intro-frame .cap{
+  position:absolute;left:20px;bottom:20px;z-index:2;color:var(--bone);
+  font-size:10px;letter-spacing:.28em;text-transform:uppercase;
+  background:rgba(14,13,11,.45);padding:8px 12px;backdrop-filter:blur(4px);
+}
+@media (max-width:860px){.intro{grid-template-columns:1fr}.intro-frame{aspect-ratio:5/6}}
+
+/* GALLERY */
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(12,1fr);
+  grid-auto-rows:10vw;
+  gap:14px;
+  margin-top:64px;
+}
+.tile{
+  position:relative;overflow:hidden;background:var(--smoke);
+  cursor:pointer;
+}
+.tile img{width:100%;height:100%;object-fit:cover;transition:transform 1.4s cubic-bezier(.2,.8,.2,1),filter 1s;filter:saturate(.92) contrast(1.02)}
+.tile:hover img{transform:scale(1.06);filter:saturate(1) contrast(1.06)}
+.tile::after{
+  content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(14,13,11,.75));
+  opacity:0;transition:opacity .5s;
+}
+.tile:hover::after{opacity:1}
+.tile .info{
+  position:absolute;left:22px;right:22px;bottom:18px;z-index:2;
+  transform:translateY(10px);opacity:0;transition:opacity .5s .05s,transform .6s cubic-bezier(.2,.8,.2,1);
+  display:flex;justify-content:space-between;align-items:end;gap:16px;
+}
+.tile:hover .info{opacity:1;transform:translateY(0)}
+.tile .info h3{
+  font-family:var(--fs-serif);font-weight:300;font-style:italic;font-size:28px;line-height:1;margin:0;
+}
+.tile .info span{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--bone-2)}
+.tile .tag{
+  position:absolute;top:18px;left:22px;z-index:2;
+  font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--bone);
+  display:flex;gap:10px;align-items:center;
+}
+.tile .tag::before{content:"";width:22px;height:1px;background:var(--brass)}
+
+.t1{grid-column:span 7;grid-row:span 4}
+.t2{grid-column:span 5;grid-row:span 3}
+.t3{grid-column:span 5;grid-row:span 3}
+.t4{grid-column:span 4;grid-row:span 3}
+.t5{grid-column:span 3;grid-row:span 3}
+.t6{grid-column:span 5;grid-row:span 3}
+.t7{grid-column:span 7;grid-row:span 3}
+@media (max-width:1024px){
+  .gallery{grid-auto-rows:22vw}
+  .t1,.t7{grid-column:span 12}
+  .t2,.t3,.t4,.t5,.t6{grid-column:span 6}
+}
+@media (max-width:640px){
+  .gallery{grid-auto-rows:58vw}
+  .t1,.t2,.t3,.t4,.t5,.t6,.t7{grid-column:span 12;grid-row:span 1}
+}
+
+/* PARALLAX */
+.parallax{
+  position:relative;height:90vh;min-height:560px;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+}
+.parallax-bg{position:absolute;inset:-10% -6%;will-change:transform}
+.parallax-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(.55) contrast(1.05)}
+.parallax-content{position:relative;z-index:2;text-align:center;padding:0 24px;max-width:950px}
+.parallax-content .mark{display:inline-block;color:var(--brass);font-style:italic;font-size:38px;margin-bottom:8px}
+.parallax-content blockquote{
+  margin:0;
+  font-family:var(--fs-serif);font-weight:300;font-size:clamp(28px,4.2vw,56px);
+  line-height:1.2;letter-spacing:-.005em;color:var(--bone);
+}
+.parallax-content blockquote em{font-style:italic;color:var(--brass)}
+.parallax-content .cite{display:block;margin-top:28px;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--bone-2)}
+
+/* BEFORE AFTER */
+.ba-wrap{margin-top:56px;position:relative;aspect-ratio:16/10;overflow:hidden;background:var(--smoke);user-select:none}
+.ba-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.ba-after{position:absolute;inset:0;clip-path:inset(0 50% 0 0);transition:clip-path .05s linear}
+.ba-handle{
+  position:absolute;top:0;bottom:0;left:50%;width:2px;background:var(--bone);
+  transform:translateX(-1px);pointer-events:none;
+}
+.ba-knob{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:62px;height:62px;border-radius:50%;
+  border:1px solid var(--bone);background:rgba(14,13,11,.35);backdrop-filter:blur(6px);
+  display:flex;align-items:center;justify-content:center;gap:6px;
+  color:var(--bone);cursor:ew-resize;touch-action:none;
+  transition:background .3s, transform .3s;
+}
+.ba-knob:hover,.ba-knob.drag{background:rgba(176,138,80,.25);transform:translate(-50%,-50%) scale(1.05)}
+.ba-knob::before,.ba-knob::after{content:"";width:0;height:0;border:5px solid transparent}
+.ba-knob::before{border-right-color:var(--bone)}
+.ba-knob::after{border-left-color:var(--bone)}
+.ba-tag{
+  position:absolute;top:20px;z-index:2;
+  font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--bone);
+  padding:8px 14px;background:rgba(14,13,11,.4);backdrop-filter:blur(6px);
+}
+.ba-tag.l{left:20px}
+.ba-tag.r{right:20px}
+
+/* CONTACT */
+.contact{
+  display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,96px);
+  align-items:start;
+}
+.contact-mail{
+  display:block;margin-top:18px;
+  font-family:var(--fs-serif);font-weight:300;font-style:italic;
+  font-size:clamp(30px,4.5vw,60px);line-height:1.1;
+  color:var(--bone);
+  background-image:linear-gradient(var(--brass),var(--brass));
+  background-size:0 1px;background-repeat:no-repeat;background-position:0 100%;
+  transition:background-size .6s cubic-bezier(.7,0,.2,1), color .4s;
+  padding-bottom:6px;
+}
+.contact-mail:hover{background-size:100% 1px;color:var(--brass)}
+.contact-meta{
+  border-top:1px solid var(--line);padding-top:28px;margin-top:36px;
+  display:grid;grid-template-columns:1fr 1fr;gap:28px;
+}
+.contact-meta dt{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--ash);margin-bottom:8px}
+.contact-meta dd{margin:0;color:var(--bone);font-size:15px;line-height:1.6}
+.contact-aside{
+  border:1px solid var(--line);padding:36px;
+  position:relative;
+}
+.contact-aside h3{margin:0 0 14px;font-family:var(--fs-serif);font-weight:300;font-size:28px;line-height:1.15}
+.contact-aside p{margin:0 0 28px;color:var(--bone-2);font-size:14px;line-height:1.75}
+.contact-aside .wa-inline{
+  display:inline-flex;align-items:center;gap:14px;
+  padding:14px 22px;border:1px solid var(--brass);color:var(--brass);
+  font-size:11px;letter-spacing:.3em;text-transform:uppercase;
+  transition:background .4s,color .4s;
+}
+.contact-aside .wa-inline:hover{background:var(--brass);color:var(--ink)}
+.contact-aside .wa-inline svg{width:14px;height:14px}
+@media (max-width:860px){.contact{grid-template-columns:1fr}.contact-meta{grid-template-columns:1fr}}
+
+/* WHATSAPP FLOAT */
+.wa-float{
+  position:fixed;right:clamp(18px,3vw,30px);bottom:clamp(18px,3vw,30px);z-index:80;
+  display:inline-flex;align-items:center;gap:12px;
+  padding:14px 20px 14px 14px;
+  background:var(--brass);color:var(--ink);
+  border-radius:999px;
+  font-size:11px;letter-spacing:.28em;text-transform:uppercase;
+  box-shadow:0 20px 40px -16px rgba(0,0,0,.55);
+  transform:translateY(120%);opacity:0;
+  transition:transform .8s cubic-bezier(.7,0,.2,1) .3s,opacity .8s .3s,background .3s;
+}
+.wa-float.in{transform:translateY(0);opacity:1}
+.wa-float:hover{background:var(--bone)}
+.wa-float .circle{
+  width:34px;height:34px;border-radius:50%;background:var(--ink);
+  display:inline-flex;align-items:center;justify-content:center;color:var(--brass);
+  flex:0 0 34px;
+}
+.wa-float svg{width:18px;height:18px}
+@media (max-width:520px){.wa-float span{display:none}.wa-float{padding:14px;border-radius:50%}}
+
+/* FOOTER */
+footer{
+  border-top:1px solid var(--line);
+  padding:40px clamp(24px,5vw,80px) 28px;
+  display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;
+  font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--ash);
+}
+footer .mark{font-family:var(--fs-serif);font-style:italic;font-size:16px;letter-spacing:.02em;text-transform:none;color:var(--bone)}
+footer a:hover{color:var(--brass)}
+
+/* UTIL */
+.nowrap{white-space:nowrap}
+</style>
+</head>
+<body>
+
+<div id="loader" aria-hidden="true">
+  <div class="loader-mark">Elodie Masure <em style="font-style:italic;color:var(--brass)">—</em> Studio</div>
+  <div class="loader-bar"></div>
+</div>
+
+<div class="cursor" aria-hidden="true"></div>
+<div class="cursor-dot" aria-hidden="true"></div>
+
+<header class="topbar">
+  <a href="#" class="mark"><b>Elodie</b> Masure<em style="font-style:italic;color:var(--brass)">.</em></a>
+  <div class="lang" role="group" aria-label="Language">
+    <button data-lang="fr" aria-label="Français">FR</button><span class="divider">/</span>
+    <button data-lang="en" aria-label="English">EN</button><span class="divider">/</span>
+    <button data-lang="es" aria-label="Español">ES</button>
+  </div>
+  <button class="menu-trigger" id="menuTrigger" aria-expanded="false" aria-controls="overlay">
+    <span class="label" data-fr="Menu" data-en="Menu" data-es="Menú">Menu</span>
+    <span class="bars" aria-hidden="true"></span>
+  </button>
+</header>
+
+<nav class="overlay" id="overlay" aria-hidden="true">
+  <div class="overlay-image" aria-hidden="true"></div>
+  <div class="overlay-nav">
+    <ol>
+      <li><a href="#home" data-fr="Accueil" data-en="Home" data-es="Inicio">Accueil</a></li>
+      <li><a href="#work" data-fr="Projets" data-en="Projects" data-es="Proyectos">Projets</a></li>
+      <li><a href="#transform" data-fr="Transformations" data-en="Transformations" data-es="Transformaciones">Transformations</a></li>
+      <li><a href="#contact" data-fr="Contact" data-en="Contact" data-es="Contacto">Contact</a></li>
+    </ol>
+    <div class="overlay-foot">
+      <span data-fr="Niçoise — Basée entre Paris &amp; Marrakech" data-en="From Nice — Based between Paris &amp; Marrakech" data-es="De Niza — Entre París y Marrakech">Niçoise — Basée entre Paris &amp; Marrakech</span>
+      <a href="mailto:studio@elodiemasure.com">studio@elodiemasure.com</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero" id="home">
+  <div class="hero-bg" id="heroBg">
+    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=2200&q=80" alt="">
+  </div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-meta">
+        <span class="rule"></span>
+        <span data-fr="Studio indépendant — Est. 2019" data-en="Independent studio — Est. 2019" data-es="Estudio independiente — Est. 2019">Studio indépendant — Est. 2019</span>
+        <span data-fr="Côte d'Azur · Paris · Marrakech" data-en="French Riviera · Paris · Marrakech" data-es="Costa Azul · París · Marrakech">Côte d'Azur · Paris · Marrakech</span>
+      </div>
+      <h1>
+        <span data-fr="Des intérieurs" data-en="Interiors" data-es="Interiores">Des intérieurs</span><br>
+        <span class="amp">&amp;</span>
+        <span data-fr="des preuves." data-en="&amp; proof of them." data-es="y su prueba.">des preuves.</span>
+      </h1>
+      <div class="hero-sub">
+        <span data-fr="Design d'intérieur" data-en="Interior Design" data-es="Diseño de interiores">Design d'intérieur</span>
+        <span style="color:var(--brass)">·</span>
+        <span data-fr="Photographie immobilière" data-en="Real Estate Photography" data-es="Fotografía inmobiliaria">Photographie immobilière</span>
+      </div>
+    </div>
+    <div class="hero-cta">
+      <span class="note" data-fr="Portfolio 2024 — 2026, sur invitation" data-en="Portfolio 2024 — 2026, by invitation" data-es="Portafolio 2024 — 2026, por invitación">Portfolio 2024 — 2026, sur invitation</span>
+      <a href="#work" class="btn"><span data-fr="Voir le travail" data-en="View the work" data-es="Ver el trabajo">Voir le travail</span><span class="arrow" aria-hidden="true"></span></a>
+    </div>
+  </div>
+  <div class="hero-scroll" aria-hidden="true">
+    <span data-fr="Faites défiler" data-en="Scroll" data-es="Desliza">Faites défiler</span>
+    <span class="line"></span>
+  </div>
+</section>
+
+<section class="section" id="studio">
+  <div class="intro">
+    <div class="reveal">
+      <span class="section-label" data-fr="Le studio — 01" data-en="The studio — 01" data-es="El estudio — 01">Le studio — 01</span>
+      <h2 class="section-title"><span data-fr="Un regard discret sur la maison." data-en="A quiet eye for the home." data-es="Una mirada discreta sobre la casa.">Un regard discret sur la maison.</span></h2>
+      <div class="intro-text section-lede">
+        <p data-fr="Elodie Masure dessine des intérieurs de caractère et en documente la matière. Chaque projet commence par la lumière, la pierre, le silence d'un lieu — et finit dans l'image qui le défend sur le marché." data-en="Elodie Masure draws rooms with a distinct hand and documents their material. Every project starts with light, stone, and the silence of a place — and ends in the image that carries it to market." data-es="Elodie Masure dibuja interiores de carácter y documenta su materia. Cada proyecto empieza por la luz, la piedra y el silencio de un lugar — y termina en la imagen que lo defiende en el mercado.">Elodie Masure dessine des intérieurs de caractère et en documente la matière. Chaque projet commence par la lumière, la pierre, le silence d'un lieu — et finit dans l'image qui le défend sur le marché.</p>
+        <p data-fr="Villas privées, hôtels particuliers, adresses Airbnb de standing, programmes immobiliers de prestige : une direction artistique cohérente, de la première planche à la dernière prise de vue." data-en="Private villas, townhouses, high-end short-stay listings, prestige developments: a single art direction carried from mood board to final frame." data-es="Villas privadas, palacetes, viviendas Airbnb de alto nivel, promociones inmobiliarias de prestigio: una misma dirección artística desde el primer boceto hasta la última toma.">Villas privées, hôtels particuliers, adresses Airbnb de standing, programmes immobiliers de prestige : une direction artistique cohérente, de la première planche à la dernière prise de vue.</p>
+      </div>
+      <div class="intro-numbers">
+        <div><div class="num">47<em>+</em></div><span class="lbl" data-fr="Projets signés" data-en="Signed projects" data-es="Proyectos firmados">Projets signés</span></div>
+        <div><div class="num">6<em>€M</em></div><span class="lbl" data-fr="Valeur médiane" data-en="Median listing" data-es="Valor mediano">Valeur médiane</span></div>
+        <div><div class="num">11<em>pays</em></div><span class="lbl" data-fr="Déplacements" data-en="Countries shot" data-es="Países">Déplacements</span></div>
+      </div>
+    </div>
+    <figure class="intro-frame reveal d2" style="margin:0">
+      <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1200&q=80" alt="">
+      <figcaption class="cap" data-fr="Villa privée — Cap-Ferrat, 2025" data-en="Private villa — Cap-Ferrat, 2025" data-es="Villa privada — Cap-Ferrat, 2025">Villa privée — Cap-Ferrat, 2025</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="section" id="work" style="padding-top:clamp(48px,8vh,96px)">
+  <div class="reveal" style="display:flex;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap">
+    <div>
+      <span class="section-label" data-fr="Sélection — 02" data-en="Selected — 02" data-es="Selección — 02">Sélection — 02</span>
+      <h2 class="section-title"><span data-fr="Projets" data-en="Projects" data-es="Proyectos">Projets</span> <em data-fr="récents" data-en="recent" data-es="recientes">récents</em>.</h2>
+    </div>
+    <p class="section-lede" style="max-width:38ch" data-fr="Sept adresses, du Vieux-Nice à la médina de Marrakech. Architecture, mise en scène, photographie — par la même main." data-en="Seven addresses, from Vieux-Nice to the Marrakech medina. Architecture, styling, photography — single-handed." data-es="Siete direcciones, del Vieux-Nice a la medina de Marrakech. Arquitectura, escenografía, fotografía — una sola mano.">Sept adresses, du Vieux-Nice à la médina de Marrakech. Architecture, mise en scène, photographie — par la même main.</p>
+  </div>
+  <div class="gallery reveal d1">
+    <article class="tile t1">
+      <img src="https://images.unsplash.com/photo-1600210491892-03d54c0aaf87?w=1600&q=80" alt="">
+      <span class="tag">Nº 01</span>
+      <div class="info"><h3 data-fr="Maison Saleya" data-en="Maison Saleya" data-es="Maison Saleya">Maison Saleya</h3><span>Nice · 2025</span></div>
+    </article>
+    <article class="tile t2">
+      <img src="https://images.unsplash.com/photo-1615529182904-14819c35db37?w=1200&q=80" alt="">
+      <span class="tag">Nº 02</span>
+      <div class="info"><h3 data-fr="Appartement Trocadéro" data-en="Trocadéro Residence" data-es="Residencia Trocadéro">Appartement Trocadéro</h3><span>Paris · 2025</span></div>
+    </article>
+    <article class="tile t3">
+      <img src="https://images.unsplash.com/photo-1617104551722-3b2d51366400?w=1200&q=80" alt="">
+      <span class="tag">Nº 03</span>
+      <div class="info"><h3 data-fr="Riad Dar Zina" data-en="Riad Dar Zina" data-es="Riad Dar Zina">Riad Dar Zina</h3><span>Marrakech · 2024</span></div>
+    </article>
+    <article class="tile t4">
+      <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c8?w=1200&q=80" alt="">
+      <span class="tag">Nº 04</span>
+      <div class="info"><h3 data-fr="Villa Minerve" data-en="Villa Minerve" data-es="Villa Minerve">Villa Minerve</h3><span>Èze · 2024</span></div>
+    </article>
+    <article class="tile t5">
+      <img src="https://images.unsplash.com/photo-1616137466211-f939a420be84?w=1000&q=80" alt="">
+      <span class="tag">Nº 05</span>
+      <div class="info"><h3 data-fr="Studio d'Azur" data-en="Studio d'Azur" data-es="Studio d'Azur">Studio d'Azur</h3><span>Antibes · 2024</span></div>
+    </article>
+    <article class="tile t6">
+      <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1400&q=80" alt="">
+      <span class="tag">Nº 06</span>
+      <div class="info"><h3 data-fr="Chambre Lavande" data-en="Lavande Suite" data-es="Suite Lavande">Chambre Lavande</h3><span>Cannes · 2025</span></div>
+    </article>
+    <article class="tile t7">
+      <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1800&q=80" alt="">
+      <span class="tag">Nº 07</span>
+      <div class="info"><h3 data-fr="Bastide Orangerie" data-en="Bastide Orangerie" data-es="Bastida Orangerie">Bastide Orangerie</h3><span>Aix-en-Provence · 2025</span></div>
+    </article>
+  </div>
+</section>
+
+<section class="parallax" aria-hidden="false">
+  <div class="parallax-bg" id="paraBg">
+    <img src="https://images.unsplash.com/photo-1613545325278-f24b0cae1224?w=2200&q=80" alt="">
+  </div>
+  <div class="parallax-content reveal">
+    <span class="mark">—</span>
+    <blockquote>
+      <span data-fr="Une maison se vend deux fois : d'abord sur l'image, ensuite au seuil. " data-en="A house sells twice: first on the image, then on the threshold. " data-es="Una casa se vende dos veces: primero en la imagen, luego en el umbral. ">Une maison se vend deux fois : d'abord sur l'image, ensuite au seuil. </span>
+      <em data-fr="Les deux fois, il faut qu'elle respire." data-en="Both times, it must breathe." data-es="Las dos veces, tiene que respirar.">Les deux fois, il faut qu'elle respire.</em>
+    </blockquote>
+    <span class="cite">Elodie Masure — Studio Notes</span>
+  </div>
+</section>
+
+<section class="section" id="transform">
+  <div class="reveal" style="display:flex;justify-content:space-between;align-items:end;gap:40px;flex-wrap:wrap">
+    <div>
+      <span class="section-label" data-fr="Avant · Après — 03" data-en="Before · After — 03" data-es="Antes · Después — 03">Avant · Après — 03</span>
+      <h2 class="section-title"><span data-fr="La même pièce," data-en="The same room," data-es="La misma pieza,">La même pièce,</span> <em data-fr="deux histoires." data-en="two stories." data-es="dos historias.">deux histoires.</em></h2>
+    </div>
+    <p class="section-lede" style="max-width:42ch" data-fr="Faites glisser la poignée. À gauche, l'héritage. À droite, la mise en scène finale — matériaux, lumière, cadrage. Exemple : Villa Minerve, salon principal, printemps 2024." data-en="Drag the handle. Left, the inheritance. Right, the final staging — materials, light, framing. Example: Villa Minerve, main room, spring 2024." data-es="Arrastra el tirador. A la izquierda, la herencia. A la derecha, la puesta en escena final — materiales, luz, encuadre. Ejemplo: Villa Minerve, salón, primavera 2024.">Faites glisser la poignée. À gauche, l'héritage. À droite, la mise en scène finale — matériaux, lumière, cadrage. Exemple : Villa Minerve, salon principal, printemps 2024.</p>
+  </div>
+
+  <div class="ba-wrap reveal d1" id="ba">
+    <img class="ba-img ba-before" src="https://images.unsplash.com/photo-1556020685-ae41abfc9365?w=1800&q=80" alt="Before">
+    <div class="ba-after" id="baAfter">
+      <img class="ba-img" src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1800&q=80" alt="After">
+    </div>
+    <div class="ba-tag l" data-fr="Avant" data-en="Before" data-es="Antes">Avant</div>
+    <div class="ba-tag r" data-fr="Après" data-en="After" data-es="Después">Après</div>
+    <div class="ba-handle" id="baHandle">
+      <div class="ba-knob" id="baKnob" role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" tabindex="0"></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="contact" style="padding-top:clamp(48px,8vh,96px)">
+  <div class="reveal">
+    <span class="section-label" data-fr="Contact — 04" data-en="Contact — 04" data-es="Contacto — 04">Contact — 04</span>
+  </div>
+  <div class="contact">
+    <div class="reveal d1">
+      <h2 class="section-title" style="max-width:20ch"><span data-fr="Un lieu à raconter ?" data-en="A place to tell?" data-es="¿Un lugar que contar?">Un lieu à raconter ?</span></h2>
+      <p class="section-lede" data-fr="Le studio accepte un nombre restreint de projets chaque saison. Un courrier suffit — plans, quelques images, vos intentions." data-en="The studio takes on a limited number of projects each season. A short email is enough — plans, a handful of images, your intent." data-es="El estudio acepta un número limitado de proyectos por temporada. Un correo basta — planos, algunas imágenes, sus intenciones.">Le studio accepte un nombre restreint de projets chaque saison. Un courrier suffit — plans, quelques images, vos intentions.</p>
+      <a class="contact-mail" href="mailto:studio@elodiemasure.com">studio@elodiemasure.com</a>
+      <dl class="contact-meta">
+        <div><dt data-fr="Direct" data-en="Direct" data-es="Directo">Direct</dt><dd class="nowrap">+33 6 48 02 19 74</dd></div>
+        <div><dt data-fr="Studio" data-en="Studio" data-es="Estudio">Studio</dt><dd>17 rue Saint-François de Paule<br>06300 Nice, France</dd></div>
+        <div><dt data-fr="Réponse" data-en="Response" data-es="Respuesta">Réponse</dt><dd data-fr="Sous 48 h ouvrées" data-en="Within 48 business hours" data-es="En 48 h laborables">Sous 48 h ouvrées</dd></div>
+        <div><dt data-fr="Langues" data-en="Languages" data-es="Idiomas">Langues</dt><dd>Français · English · Español</dd></div>
+      </dl>
+    </div>
+    <aside class="contact-aside reveal d2">
+      <h3 data-fr="Un devis rapide ?" data-en="Quick quote?" data-es="¿Presupuesto rápido?">Un devis rapide ?</h3>
+      <p data-fr="Décrivez le bien en deux lignes sur WhatsApp — surface, localisation, délais. Réponse chiffrée dans la journée." data-en="Send two lines on WhatsApp — size, location, timing. You get a numbered reply the same day." data-es="Describa el inmueble en dos líneas por WhatsApp — superficie, ubicación, plazos. Respuesta con cifras el mismo día.">Décrivez le bien en deux lignes sur WhatsApp — surface, localisation, délais. Réponse chiffrée dans la journée.</p>
+      <a href="#" class="wa-inline" id="waInline">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.6.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.8-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.5.1-.2 0-.3 0-.5s-.6-1.5-.9-2.1c-.2-.5-.5-.4-.6-.4H7.3c-.2 0-.5.1-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3 4.9 4.2.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.2-.2-.2-.5-.3zM12 3a9 9 0 0 0-8 13.2L3 21l4.9-1.3A9 9 0 1 0 12 3z"/></svg>
+        <span data-fr="WhatsApp · Devis" data-en="WhatsApp · Quote" data-es="WhatsApp · Presupuesto">WhatsApp · Devis</span>
+      </a>
+    </aside>
+  </div>
+</section>
+
+<a href="#" class="wa-float" id="waFloat" aria-label="WhatsApp">
+  <span class="circle">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.6.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.8-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.5.1-.2 0-.3 0-.5s-.6-1.5-.9-2.1c-.2-.5-.5-.4-.6-.4H7.3c-.2 0-.5.1-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3 4.9 4.2.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.2-.2-.2-.5-.3zM12 3a9 9 0 0 0-8 13.2L3 21l4.9-1.3A9 9 0 1 0 12 3z"/></svg>
+  </span>
+  <span data-fr="Écrire sur WhatsApp" data-en="Message on WhatsApp" data-es="Escribir por WhatsApp">Écrire sur WhatsApp</span>
+</a>
+
+<footer>
+  <a href="#" class="mark">Elodie Masure <em style="font-style:italic;color:var(--brass)">Studio</em></a>
+  <span data-fr="© 2026 — Tous droits réservés" data-en="© 2026 — All rights reserved" data-es="© 2026 — Todos los derechos reservados">© 2026 — Tous droits réservés</span>
+  <span>
+    <a href="mailto:studio@elodiemasure.com">studio@elodiemasure.com</a>
+    <span style="opacity:.4;margin:0 12px">·</span>
+    <a href="#home" data-fr="Retour en haut" data-en="Back to top" data-es="Volver arriba">Retour en haut</a>
+  </span>
+</footer>
+
+<script>
+(() => {
+  /* LOADER */
+  const loader = document.getElementById('loader');
+  window.addEventListener('load', () => {
+    setTimeout(() => loader.classList.add('done'), 900);
+  });
+
+  /* CUSTOM CURSOR */
+  const ring = document.querySelector('.cursor');
+  const dot  = document.querySelector('.cursor-dot');
+  let mx=0,my=0,rx=0,ry=0;
+  addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    dot.style.transform = `translate3d(${mx}px,${my}px,0) translate(-50%,-50%)`;
+  });
+  (function loop(){
+    rx += (mx - rx) * .18; ry += (my - ry) * .18;
+    ring.style.transform = `translate3d(${rx}px,${ry}px,0) translate(-50%,-50%)`;
+    requestAnimationFrame(loop);
+  })();
+  document.querySelectorAll('a, button, .tile, .ba-knob').forEach(el => {
+    el.addEventListener('mouseenter', () => ring.classList.add('hover'));
+    el.addEventListener('mouseleave', () => ring.classList.remove('hover'));
+  });
+
+  /* MENU */
+  const trigger = document.getElementById('menuTrigger');
+  const overlay = document.getElementById('overlay');
+  const closeMenu = () => {
+    document.body.classList.remove('menu-open');
+    trigger.setAttribute('aria-expanded','false');
+    overlay.setAttribute('aria-hidden','true');
+  };
+  trigger.addEventListener('click', () => {
+    const open = !document.body.classList.contains('menu-open');
+    document.body.classList.toggle('menu-open', open);
+    trigger.setAttribute('aria-expanded', String(open));
+    overlay.setAttribute('aria-hidden', String(!open));
+  });
+  overlay.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', closeMenu));
+  addEventListener('keydown', e => e.key === 'Escape' && closeMenu());
+
+  /* SCROLL REVEAL */
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: .14 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  /* HERO + PARALLAX */
+  const heroBg = document.getElementById('heroBg');
+  const paraBg = document.getElementById('paraBg');
+  const onScroll = () => {
+    const y = window.scrollY;
+    if (heroBg) heroBg.style.transform = `translate3d(0, ${y * .28}px, 0) scale(1.06)`;
+    if (paraBg) {
+      const rect = paraBg.parentElement.getBoundingClientRect();
+      const rel = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
+      paraBg.style.transform = `translate3d(0, ${(rel - .5) * 80}px, 0)`;
+    }
+  };
+  addEventListener('scroll', onScroll, { passive:true });
+  onScroll();
+
+  /* BEFORE / AFTER */
+  const ba = document.getElementById('ba');
+  const baAfter = document.getElementById('baAfter');
+  const baHandle = document.getElementById('baHandle');
+  const baKnob = document.getElementById('baKnob');
+  let dragging = false;
+  const setBA = (pct) => {
+    pct = Math.max(0, Math.min(100, pct));
+    baAfter.style.clipPath = `inset(0 ${100 - pct}% 0 0)`;
+    baHandle.style.left = pct + '%';
+    baKnob.setAttribute('aria-valuenow', Math.round(pct));
+  };
+  const moveFromEvent = (e) => {
+    const rect = ba.getBoundingClientRect();
+    const x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+    setBA((x / rect.width) * 100);
+  };
+  const start = (e) => { dragging = true; baKnob.classList.add('drag'); moveFromEvent(e); };
+  const move  = (e) => { if (!dragging) return; e.preventDefault(); moveFromEvent(e); };
+  const end   = () => { dragging = false; baKnob.classList.remove('drag'); };
+  baKnob.addEventListener('mousedown', start);
+  baKnob.addEventListener('touchstart', start, { passive:true });
+  ba.addEventListener('click', (e) => { if (e.target === baKnob) return; moveFromEvent(e); });
+  addEventListener('mousemove', move);
+  addEventListener('touchmove', move, { passive:false });
+  addEventListener('mouseup', end);
+  addEventListener('touchend', end);
+  baKnob.addEventListener('keydown', (e) => {
+    const cur = parseFloat(baKnob.getAttribute('aria-valuenow')) || 50;
+    if (e.key === 'ArrowLeft')  setBA(cur - 4);
+    if (e.key === 'ArrowRight') setBA(cur + 4);
+  });
+  setBA(50);
+
+  /* LANGUAGE */
+  const SUPPORTED = ['fr','en','es'];
+  const applyLang = (lang) => {
+    document.documentElement.lang = lang;
+    document.querySelectorAll('[data-fr], [data-en], [data-es]').forEach(el => {
+      const val = el.getAttribute('data-' + lang);
+      if (!val) return;
+      if (el.tagName === 'META') { el.setAttribute('content', val); return; }
+      if (el.tagName === 'TITLE') { document.title = val; return; }
+      el.innerHTML = val;
+    });
+    document.querySelectorAll('.lang button').forEach(b => {
+      b.classList.toggle('active', b.dataset.lang === lang);
+    });
+    try { localStorage.setItem('lang', lang); } catch(_) {}
+    const url = new URL(location.href); url.searchParams.set('lang', lang);
+    history.replaceState(null, '', url);
+    updateWa(lang);
+  };
+  const detectLang = () => {
+    const url = new URLSearchParams(location.search).get('lang');
+    if (SUPPORTED.includes(url)) return url;
+    let stored; try { stored = localStorage.getItem('lang'); } catch(_) {}
+    if (SUPPORTED.includes(stored)) return stored;
+    const nav = (navigator.language || 'en').slice(0,2).toLowerCase();
+    return SUPPORTED.includes(nav) ? nav : 'en';
+  };
+  document.querySelectorAll('.lang button').forEach(b =>
+    b.addEventListener('click', () => applyLang(b.dataset.lang))
+  );
+
+  /* WHATSAPP */
+  const WA_PHONE = '33648021974';
+  const WA_MSG = {
+    fr: "Bonjour Elodie, j'aimerais un devis pour un projet (surface / adresse / délais) :",
+    en: "Hello Elodie, I'd like a quote for a project (size / address / timing):",
+    es: "Hola Elodie, quisiera un presupuesto para un proyecto (superficie / dirección / plazos):"
+  };
+  const waFloat  = document.getElementById('waFloat');
+  const waInline = document.getElementById('waInline');
+  const updateWa = (lang) => {
+    const href = `https://wa.me/${WA_PHONE}?text=${encodeURIComponent(WA_MSG[lang] || WA_MSG.en)}`;
+    waFloat.href = href;
+    waInline.href = href;
+    waFloat.target = '_blank';
+    waInline.target = '_blank';
+    waFloat.rel = waInline.rel = 'noopener noreferrer';
+  };
+  setTimeout(() => waFloat.classList.add('in'), 1800);
+
+  applyLang(detectLang());
+})();
+</script>
+
+</body>
+</html>
